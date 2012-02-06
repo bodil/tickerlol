@@ -12,7 +12,7 @@ def tickers(s):
     return [json.loads(urlopen("http://finance.google.com/finance/info?client=ig&q=%s" % quote(id)).read().replace("//", ""))[0] for id in s.split(" ")]
 
 def label(tickers):
-    return " ".join(["%(t)s %(l_cur)s" % ticker for ticker in tickers])
+    return " ".join(["%s %s" % (ticker["t"], ticker["el_cur" if ticker.has_key("el_cur") else "l_cur"]) for ticker in tickers])
 
 def quit(*args):
     sys.exit(0)
